@@ -7,24 +7,23 @@ import java.util.Scanner;
 public class Day02_1 {
 	
 	public static void main(String[] args) throws FileNotFoundException {
-		File file = new File("src/day01/input_1");
+		File file = new File("src/day02/input_1");
 		try (Scanner sc = new Scanner(file)) {
-			boolean check = false;
-			int depth = 0, count = 0;
+			int depth = 0, horizontal = 0;
 			while (sc.hasNextLine()) {
-				if (!check) {
-					depth = sc.nextInt();
-					check = true;
-				} else {
-					int temp = sc.nextInt();
-					if (temp > depth) {
-						count++;
-					}
-					depth = temp;
+				String[] split = sc.nextLine().split(" ");
+				int value = Integer.parseInt(split[1]);
+				if (split[0].equals("forward")) {
+					horizontal += value;
+				} else if (split[0].equals("down")) {
+					depth += value;
+				} else if (split[0].equals("up")) {
+					depth -= value;
 				}
+			
 			}
 			
-			System.out.println("Solution: " + count);
+			System.out.println("Solution: " + (depth * horizontal));
 		}
 	}
 
