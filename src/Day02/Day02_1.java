@@ -9,16 +9,17 @@ public class Day02_1 {
 	public static void main(String[] args) throws FileNotFoundException {
 		File file = new File("src/day02/input_1");
 		try (Scanner sc = new Scanner(file)) {
-			int depth = 0, horizontal = 0;
+			int depth = 0, horizontal = 0, aim = 0;
 			while (sc.hasNextLine()) {
 				String[] split = sc.nextLine().split(" ");
 				int value = Integer.parseInt(split[1]);
 				if (split[0].equals("forward")) {
 					horizontal += value;
+					depth += aim * value;
 				} else if (split[0].equals("down")) {
-					depth += value;
+					aim += value;
 				} else if (split[0].equals("up")) {
-					depth -= value;
+					aim -= value;
 				}
 			
 			}
