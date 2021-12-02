@@ -25,6 +25,7 @@ public class Day01_2 {
 			}
 			
 			System.out.println("Solution: " + count);
+			System.out.println("test");
 		}
 	}
 
