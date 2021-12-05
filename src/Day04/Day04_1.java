@@ -20,11 +20,6 @@ public class Day04_1 {
 			}
 		}	
 		
-		for (String string : input) {
-			if (string.equals("")) {
-			}
-		}
-		
 		ArrayList<Integer[][]> boards = new ArrayList<Integer[][]>();
 		
 		

@@ -3,6 +3,7 @@ package Day04;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 
@@ -20,18 +21,10 @@ public class Day04_2 {
 			}
 		}	
 		
-		// check boards
-		int count = 0;
-		for (String string : input) {
-			if (string.equals("")) {
-				count++;
-			}
-		}
-		
 		ArrayList<Integer[][]> boards = new ArrayList<Integer[][]>();
 		
 		
-		// boards bef�llen und in boards hauen
+		// boards befuellen und in boards hauen
 		int size = 5;
 		Integer[][] board = new Integer[size][size];
 		int row = 0;
@@ -60,10 +53,9 @@ public class Day04_2 {
 		String[] winningNumbers = input.get(0).split(",");
 		boolean check = false;
 		int lastNumber = 0;
-		Integer[][] winner = new Integer[size][size];
-		
-		
+	
 		for (int i = 0; i < winningNumbers.length; i++) {
+			
 			if (check) {
 				break;
 			}
@@ -80,35 +72,31 @@ public class Day04_2 {
 				}
 			}
 			
-			// find winning board
-			
-			for (Integer[][] b : boards) {
+			for (int x = 0; x < boards.size(); x++) {
+				Integer[][] b = boards.get(x);
 				for (int j = 0; j < b.length; j++) {
 					if ((b[j][0] == b[j][1] && b[j][1] == b[j][2] && b[j][2] == b[j][3] && b[j][3] == b[j][4]) || (b[0][j] == b[1][j] && b[1][j] == b[2][j] && b[2][j] == b[3][j] && b[3][j] == b[4][j])) {
-						winner = b;
-						lastNumber = number;
-						check = true;
-						break;
+						if (boards.size() > 1) {
+							boards.remove(x);
+						} else if (boards.size() == 1) {
+							check = true;
+							lastNumber = number;
+							break;
+						}
 					}
 				}
-				if (check) {
-					break;
-				}
 			}
-			
 		}
-		
 		
 		int result = 0;
-		for (int j = 0; j < winner.length; j++) {
-			for (int k = 0; k < winner[j].length; k++) {
-				if (winner[j][k] != -1) {
-					result += winner[j][k];
+		Integer[][] winner = boards.get(0);
+		for (int i = 0; i < winner.length; i++) {
+			for (int j = 0; j < winner[i].length; j++) {
+				if (winner[i][j] != -1) {
+					result += winner[i][j];
 				}
-			}
+			}		
 		}
-		
 		System.out.println("Solution: " + (result*lastNumber));
-	}
-
+	}	
 }
