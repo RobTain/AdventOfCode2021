@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 
 
-public class Day04_1 {
+public class Day04_2 {
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		File file = new File("src/day04/input_1");
@@ -20,15 +20,18 @@ public class Day04_1 {
 			}
 		}	
 		
+		// check boards
+		int count = 0;
 		for (String string : input) {
 			if (string.equals("")) {
+				count++;
 			}
 		}
 		
 		ArrayList<Integer[][]> boards = new ArrayList<Integer[][]>();
 		
 		
-		// boards befuellen und in boards hauen
+		// boards bef�llen und in boards hauen
 		int size = 5;
 		Integer[][] board = new Integer[size][size];
 		int row = 0;
