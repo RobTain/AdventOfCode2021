@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 
 
-public class Day05_1 {
+public class Day06_2 {
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		File file = new File("src/day05/input_1");
@@ -69,7 +69,41 @@ public class Day05_1 {
 					grid[y1][i]++;
 				}
 			} else {
-				continue;
+				int difference = Math.max(x1, x2) - Math.min(x1, x2) + 1;
+				
+				if (x1 < x2 && y1 < y2) {
+					while( difference > 0) {
+						grid[y1][x1]++;
+						x1++;
+						y1++;
+						difference--;
+					}
+					
+				} else if (x1 < x2 && y1 > y2) {
+					while( difference > 0) {
+						grid[y1][x1]++;
+						x1++;
+						y1--;
+						difference--;
+					}
+					
+				} else if (x1 > x2 && y1 < y2) {
+					while( difference > 0) {
+						grid[y1][x1]++;
+						x1--;
+						y1++;
+						difference--;
+					}
+				} else if (x1 > x2 && y1 > y2) {
+					while( difference > 0) {
+						grid[y1][x1]++;
+						x1--;
+						y1--;
+						difference--;
+					}
+					
+				}
+				
 			}	
 		}
 		
