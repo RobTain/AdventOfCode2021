@@ -10,82 +10,38 @@ import java.util.Scanner;
 public class Day06_1 {
 	
 	public static void main(String[] args) throws FileNotFoundException {
-		File file = new File("src/day05/input_1");
+		File file = new File("src/day06/input_1");
 		
-		ArrayList<String> input = new ArrayList<String>();
+		String lanternfish = "";
 	
 		try (Scanner sc = new Scanner(file)) {	
 			while (sc.hasNextLine()) {
-				input.add(sc.nextLine());
+				lanternfish = sc.nextLine();
 			}
 		}	
 		
-		// find array bounds
-		int maxX = 0, maxY = 0;
+		String[] split = lanternfish.split(",");
 		
-		for (int i = 0; i < input.size(); i++) {
-			String tmp = input.get(i);
-			tmp = tmp.replace(" -> ", ",");
-			input.set(i, tmp);
-			String[] split = tmp.split(",");
-			
-			
-			int maxValueX = Math.max(Integer.parseInt(split[0]), Integer.parseInt(split[2]));
-			int maxValueY = Math.max(Integer.parseInt(split[1]), Integer.parseInt(split[3]));
-			
-			if (maxValueX > maxX) {
-				maxX = maxValueX;
-			}
-			
-			if (maxValueY > maxY) {
-				maxY = maxValueY;
-			}
+		// save fishies into a list
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		for (String s : split) {
+			list.add(Integer.parseInt(s));
 		}
 		
-		maxX++; maxY++;
+		// make a lot of fishies - uff
+		for (int i = 0; i < 80; i++) {
+			for (int j = 0; j < list.size(); j++) {
+				int tmp = list.get(j);
+				if (tmp == 0) {
+					list.set(j, 6);
+					list.add(9);
+				} else {
+					list.set(j, list.get(j) - 1);
+				}
+			}
+		}
 
-		
-		Integer[][] grid = new Integer[maxX][maxY];
-		for (Integer[] integers : grid) {
-			for (int i = 0; i < integers.length; i++) {
-				integers[i] = 0;
-			}
-		}
-		
-		for (String string : input) {
-			String[] split = string.split(",");
-			
-			int x1 = Integer.parseInt(split[0]);
-			int x2 = Integer.parseInt(split[2]);
-			int y1 = Integer.parseInt(split[1]);
-			int y2 = Integer.parseInt(split[3]);
-			
-			if (x1 == x2) {
-				for (int i = Math.min(y1, y2); i <= Math.max(y1, y2); i++) {
-					grid[i][x1]++;
-				}
-			} else if (y1 == y2) {			
-				for (int i = Math.min(x1, x2); i <= Math.max(x1, x2); i++) {
-					grid[y1][i]++;
-				}
-			} else {
-				continue;
-			}	
-		}
-		
-		int count = 0;
-		for (int i = 0; i < grid.length; i++) {
-			for (int j = 0; j < grid[i].length; j++) {
-				if (grid[i][j] >= 2) {
-					count++;
-				}
-			}
-		}
-		
-		
-
-		
-		System.out.println("Solution: " + count);
+		System.out.println("Solution: " + list.size());
 	}
 
 }
