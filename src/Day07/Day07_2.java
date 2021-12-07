@@ -43,8 +43,7 @@ public class Day07_2 {
 				// Gauss Algo (1 + 2 + 3 + 4 + 5 -> n * (n + 1)/ 2
 				int n = (Math.max(integer, i) - Math.min(integer, i));
 				tmp += (n * (n + 1)) / 2;
-				
-				// tmp += calc
+
 			}
 			if (bestValue > tmp) {
 				bestValue = tmp;
